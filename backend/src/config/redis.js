@@ -2,11 +2,10 @@ const IORedis = require('ioredis');
 
 const redis = new IORedis({
     host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    port: 6379,
+    tls: {},                 // REQUIRED
     maxRetriesPerRequest: null
 });
-
-redis.set("test", "123").then(console.log);
 
 redis.on('connect', () => {
     console.log('Redis connected');
