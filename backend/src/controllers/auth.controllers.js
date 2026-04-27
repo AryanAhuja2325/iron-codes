@@ -137,8 +137,8 @@ async function login(req, res) {
                 otp,
                 { EX: OTP_EXPIRY }
             );
-
-            await sendOTPEmail(user.email, otp, "Login");
+            console.log(otp)
+            // await sendOTPEmail(user.email, otp, "Login");
 
             return res.status(200).json({
                 message: "OTP sent to registered email"
