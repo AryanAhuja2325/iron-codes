@@ -1,5 +1,5 @@
 const Submission = require('../models/submission.model');
-const queue = require('../config/queue');
+const { queue } = require('../config/queue');
 const crypto = require('crypto');
 
 const getCodeHash = (code) => {
