@@ -1,10 +1,13 @@
 const { Queue } = require('bullmq');
 
+const connection = {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    tls: {} // REQUIRED for AWS Redis
+};
+
 const queue = new Queue('judgeQueue', {
-    connection: {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT
-    },
+    connection,
     limiter: {
         max: 10,
         duration: 1000
@@ -12,3 +15,4 @@ const queue = new Queue('judgeQueue', {
 });
 
 module.exports = queue;
+module.exports.connection = connection;
