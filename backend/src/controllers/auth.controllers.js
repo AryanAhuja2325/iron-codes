@@ -81,6 +81,7 @@ async function verifyRegisterOTP(req, res) {
 }
 
 async function login(req, res) {
+    console.log("called");
     try {
         const { identifier, password, loginType } = req.body;
         // identifier = email OR username
@@ -131,14 +132,15 @@ async function login(req, res) {
         if (loginType === "OTP") {
 
             const otp = generateOTP();
-
+            console.log(otp)
             await redis.set(
                 `otp:${user.email}:LOGIN`, // always use email as key
                 otp,
                 { EX: OTP_EXPIRY }
             );
-            console.log(otp)
-            // await sendOTPEmail(user.email, otp, "Login");
+            console.log("set in redis")
+            await sendOTPEmail(user.email, otp, "Login");
+            console.log("mail sent");
 
             return res.status(200).json({
                 message: "OTP sent to registered email"
