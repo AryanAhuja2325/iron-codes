@@ -6,6 +6,8 @@ const redis = new IORedis({
     maxRetriesPerRequest: null
 });
 
+redis.set("test", "123").then(console.log);
+
 redis.on('connect', () => {
     console.log('Redis connected');
 });
