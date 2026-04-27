@@ -14,5 +14,4 @@ const queue = new Queue('judgeQueue', {
     }
 });
 
-module.exports = queue;
-module.exports.connection = connection;
+module.exports = { queue, connection }

@@ -5,7 +5,7 @@ const connectDB = require('./config/db');
 const colors = require('colors');
 const { rateLimit } = require('express-rate-limit');
 
-const queue = require('./config/queue');
+const { queue } = require('./config/queue');
 
 const app = express();
 
