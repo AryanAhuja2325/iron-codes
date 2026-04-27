@@ -114,7 +114,6 @@ async function login(req, res) {
 
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: true
             });
 
             return res.status(200).json({
@@ -185,7 +184,6 @@ async function verifyLoginOTP(req, res) {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true
         });
 
         res.status(200).json({
