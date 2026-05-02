@@ -1,33 +1,22 @@
 require('dotenv').config();
 const cp = require('cookie-parser');
 const express = require('express');
-const cors = require('cors');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const { rateLimit } = require('express-rate-limit');
 
-const dns = require("dns");
-
-
-dns.setServers(["1.1.1.1","8.8.8.8"])
 const { queue } = require('./config/queue');
 
-
 const app = express();
-
-app.use(cors({
-    origin: "http://localhost:5174",
-    credentials: true
-}));
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     limit: 100,
-});
-
+})
 
 app.use(express.json());
 app.use(cp());
+
 
 const authRouter = require('./routes/auth.routes');
 const userRouter = require('./routes/user.routes');
