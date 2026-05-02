@@ -15,6 +15,7 @@ const getCodeHash = (code) => {
 
 exports.createSubmission = async (req, res) => {
     try {
+
         const { problemId, code, language } = req.body;
         const userId = req.user._id;
 
@@ -83,8 +84,9 @@ exports.createSubmission = async (req, res) => {
             submissionId: submission._id
         });
 
-    } catch (err) {
+    } catch (err) {console.log(err)
         return res.status(500).json({
+            
             success: false,
             message: err.message
         });
