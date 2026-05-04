@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 // import Landing from './pages/Landing';
@@ -16,7 +15,7 @@ function App() {
           <Routes>
             {/* <Route path="/" element={<Landing />} /> */}
             <Route path="/problems" element={<Problems />} />
-             <Route path="/problems/:slug" element={<ProblemDetail />} />
+            <Route path="/problems/:slug" element={<ProblemDetail />} />
             {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<div className="flex-grow flex items-center justify-center text-xl text-muted">404 - Page Not Found</div>} />
