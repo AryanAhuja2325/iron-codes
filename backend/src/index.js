@@ -4,7 +4,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const { rateLimit } = require('express-rate-limit');
-
+const cors = require('cors');
 const { queue } = require('./config/queue');
 
 const app = express();
@@ -16,6 +16,10 @@ const limiter = rateLimit({
 
 app.use(express.json());
 app.use(cp());
+app.use(cors({
+    origin: "http://localhost:5174",
+    credentials: true
+}));
 
 
 const authRouter = require('./routes/auth.routes');
@@ -25,10 +29,10 @@ const submissionRouter = require('./routes/submission.routes');
 
 const PORT = process.env.PORT || 3000;
 
-app.use('/auth', authRouter);
-app.use('/user', userRouter);
-app.use('/problems', problemRouter);
-app.use('/submissions', submissionRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
+app.use('/api/problems', problemRouter);
+app.use('/api/submissions', submissionRouter);
 
 app.get('/queue-status', async (req, res) => {
     try {

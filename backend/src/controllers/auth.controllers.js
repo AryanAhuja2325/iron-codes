@@ -115,9 +115,10 @@ async function login(req, res) {
                 secure: false,
                 sameSite: "lax"
             });
-
+            console.log(token);
             return res.status(200).json({
                 message: "Login successful",
+                token,
                 user: {
                     id: user._id,
                     name: user.name,
@@ -192,6 +193,7 @@ async function verifyLoginOTP(req, res) {
 
         return res.status(200).json({
             message: "Login successful",
+            token,
             user: {
                 id: user._id,
                 name: user.name,
