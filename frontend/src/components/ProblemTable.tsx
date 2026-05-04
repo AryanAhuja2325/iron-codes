@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import type { Problem } from '../types/problems';
 
-type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
 
 type ProblemTableProps = {
@@ -30,9 +29,8 @@ const ProblemTable: React.FC<ProblemTableProps> = ({ problems }) => {
         <Link
           to={`/problems/${p.slug}`}
           key={p._id}
-          className={`flex items-center px-5 py-3.5 gap-4 hover:bg-orange-50/50 transition-colors ${
-            i !== problems.length - 1 ? 'border-b border-gray-100' : ''
-          }`}
+          className={`flex items-center px-5 py-3.5 gap-4 hover:bg-orange-50/50 transition-colors ${i !== problems.length - 1 ? 'border-b border-gray-100' : ''
+            }`}
         >
           {/* Index */}
           <span className="text-gray-400 text-sm w-8 flex-shrink-0">
@@ -58,8 +56,8 @@ const ProblemTable: React.FC<ProblemTableProps> = ({ problems }) => {
 
           {/* Difficulty */}
           <span className={`text-xs font-semibold w-14 text-right ${difficultyStyles[p.difficulty]}`}>
-  {p.difficulty.charAt(0).toUpperCase() + p.difficulty.slice(1)}
-</span>
+            {p.difficulty.charAt(0).toUpperCase() + p.difficulty.slice(1)}
+          </span>
         </Link>
       ))}
     </div>

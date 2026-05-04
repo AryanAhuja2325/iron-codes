@@ -1,7 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 
-const PageWrapper = ({ children, className = '' }) => {
+const PageWrapper = ({ children, className = '' }: { children: ReactNode; className?: string }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 6 }}

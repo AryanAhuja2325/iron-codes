@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Terminal, Search, ChevronDown, Code, Code2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Search, Code2 } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
 
   const [user, setUser] = useState<any>(() => {
-  const saved = localStorage.getItem('user');
-  return saved ? JSON.parse(saved) : null;
-});
-
-useEffect(() => {
-  const syncUser = () => {
     const saved = localStorage.getItem('user');
-    setUser(saved ? JSON.parse(saved) : null);
-  };
+    return saved ? JSON.parse(saved) : null;
+  });
 
-  window.addEventListener('storage', syncUser);
-  return () => window.removeEventListener('storage', syncUser);
-}, []);
+  useEffect(() => {
+    const syncUser = () => {
+      const saved = localStorage.getItem('user');
+      setUser(saved ? JSON.parse(saved) : null);
+    };
+
+    window.addEventListener('storage', syncUser);
+    return () => window.removeEventListener('storage', syncUser);
+  }, []);
 
   const navLinks = [
     { name: 'Explore', path: '/explore' },
@@ -36,7 +35,7 @@ useEffect(() => {
             <Link to="/" className="flex items-center gap-2">
               <Code2 className="h-6 w-6 text-black" />
             </Link>
-            
+
             <div className="hidden md:flex md:space-x-6">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
@@ -44,9 +43,8 @@ useEffect(() => {
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`inline-flex items-center text-sm font-normal transition-colors hover:text-black ${
-                      isActive ? 'text-black font-medium' : 'text-gray-500'
-                    } ${link.highlight ? 'text-orange-500 hover:text-orange-600' : ''}`}
+                    className={`inline-flex items-center text-sm font-normal transition-colors hover:text-black ${isActive ? 'text-black font-medium' : 'text-gray-500'
+                      } ${link.highlight ? 'text-orange-500 hover:text-orange-600' : ''}`}
                   >
                     {link.name}
                   </Link>
@@ -67,16 +65,16 @@ useEffect(() => {
                 className="block w-full pl-10 pr-3 py-1 border-transparent bg-gray-100 rounded-full text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-1 focus:ring-gray-300 transition-all"
               />
             </div>
-            
+
             {user ? (
-  <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-semibold cursor-pointer">
-    {user.name?.charAt(0).toUpperCase()}
-  </div>
-) : (
-  <Link to="/login" className="text-sm text-gray-500 hover:text-black">
-    Sign in
-  </Link>
-)}
+              <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-sm font-semibold cursor-pointer">
+                {user.name?.charAt(0).toUpperCase()}
+              </div>
+            ) : (
+              <Link to="/login" className="text-sm text-gray-500 hover:text-black">
+                Sign in
+              </Link>
+            )}
           </div>
         </div>
       </div>

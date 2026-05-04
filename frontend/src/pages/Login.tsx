@@ -21,7 +21,7 @@ async function apiFetch(path: string, body: object) {
 const api = {
   loginPassword: (identifier: string, password: string) =>
     apiFetch('/auth/login', { identifier, password, loginType: 'PASSWORD' }),
-    
+
   register: (data: {
     name: string;
     userName: string;
@@ -38,28 +38,28 @@ type Screen = 'login' | 'register' | 'verifyOtp';
 
 const Login: React.FC = () => {
 
-  const [name, setName] = useState('');
-const [userName, setUserName] = useState('');
-const [email, setEmail] = useState('');
-const [otp, setOtp] = useState('');
+  const [name,] = useState('');
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
 
 
-const registerMut = useMutation({
-  mutationFn: () =>
-    api.register({ name, userName:name, email, password }),
-  onSuccess: () => {
-    setScreen('verifyOtp');
-  },
-  onError: (e: Error) => setError(e.message),
-});
+  const registerMut = useMutation({
+    mutationFn: () =>
+      api.register({ name, userName: name, email, password }),
+    onSuccess: () => {
+      setScreen('verifyOtp');
+    },
+    onError: (e: Error) => setError(e.message),
+  });
 
-const verifyOtpMut = useMutation({
-  mutationFn: () => api.verifyRegisterOtp(email, otp),
-  onSuccess: () => {
-    navigate('/dashboard');
-  },
-  onError: (e: Error) => setError(e.message),
-});
+  const verifyOtpMut = useMutation({
+    mutationFn: () => api.verifyRegisterOtp(email, otp),
+    onSuccess: () => {
+      navigate('/dashboard');
+    },
+    onError: (e: Error) => setError(e.message),
+  });
 
   const navigate = useNavigate();
   const [screen, setScreen] = useState<Screen>('login');
@@ -69,13 +69,13 @@ const verifyOtpMut = useMutation({
   const [error, setError] = useState<string | null>(null);
 
   const loginMut = useMutation({
-  mutationFn: () => api.loginPassword(identifier, password),
-  onSuccess: () => {
-    setError(null)
-    navigate('/dashboard')
-  },
-  onError: (e: Error) => setError(e.message),
-})
+    mutationFn: () => api.loginPassword(identifier, password),
+    onSuccess: () => {
+      setError(null)
+      navigate('/dashboard')
+    },
+    onError: (e: Error) => setError(e.message),
+  })
 
   return (
     <div className="flex items-center justify-center min-h-[80vh] bg-gray-100 px-4 my-auto">
@@ -84,7 +84,7 @@ const verifyOtpMut = useMutation({
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-[400px] bg-white rounded-lg shadow-md border border-gray-200 p-6"
       >
-      
+
         <div className="text-center mb-6">
           <div className="mx-auto h-16 w-16 rounded-2xl flex items-center justify-center">
             <Code2 className="h-8 w-8 text-orange-500" />
@@ -96,7 +96,7 @@ const verifyOtpMut = useMutation({
             Access your dashboard and get coding
           </p>
         </div>
-    
+
         <button
           type="button"
           className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-gray-100 hover:bg-gray-200 transition text-sm font-medium"
@@ -181,120 +181,120 @@ const verifyOtpMut = useMutation({
           )}
 
           {screen === 'register' && (
-  <motion.form
-    key="register"
-    initial={{ opacity: 0, x: 20 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: -20 }}
-    onSubmit={(e) => {
-      e.preventDefault();
-      setError(null);
-      registerMut.mutate();
-    }}
-    className="space-y-4"
-  >
-    <div>
-      <label className="text-sm text-gray-400">Username</label>
-      <input
-        type="text"
-        value={userName}
-         placeholder="Enter Your Username"
-        onChange={(e) => setUserName(e.target.value)}
-        className="w-full mt-1 px-4 py-3 rounded-full border border-gray-300 text-sm"
-      />
-    </div>
+            <motion.form
+              key="register"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setError(null);
+                registerMut.mutate();
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="text-sm text-gray-400">Username</label>
+                <input
+                  type="text"
+                  value={userName}
+                  placeholder="Enter Your Username"
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="w-full mt-1 px-4 py-3 rounded-full border border-gray-300 text-sm"
+                />
+              </div>
 
-    <div>
-      <label className="text-sm text-gray-400">Email</label>
-      <input
-        type="email"
-         placeholder="Enter Your Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full mt-1 px-4 py-3 rounded-full border border-gray-300 text-sm"
-      />
-    </div>
+              <div>
+                <label className="text-sm text-gray-400">Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full mt-1 px-4 py-3 rounded-full border border-gray-300 text-sm"
+                />
+              </div>
 
-    <div>
-      <label className="text-sm text-gray-400">Password</label>
-      <input
-        type="password"
-         placeholder="Enter Your Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full mt-1 px-4 py-3 rounded-full border border-gray-300 text-sm"
-      />
-    </div>
+              <div>
+                <label className="text-sm text-gray-400">Password</label>
+                <input
+                  type="password"
+                  placeholder="Enter Your Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full mt-1 px-4 py-3 rounded-full border border-gray-300 text-sm"
+                />
+              </div>
 
-    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-    <button
-      type="submit"
-      disabled={registerMut.isPending}
-      className="w-full py-3 rounded-full bg-black text-white text-sm font-semibold"
-    >
-      {registerMut.isPending ? (
-        <Loader2 className="w-5 h-5 animate-spin mx-auto" />
-      ) : (
-        'Send OTP'
-      )}
-    </button>
+              <button
+                type="submit"
+                disabled={registerMut.isPending}
+                className="w-full py-3 rounded-full bg-black text-white text-sm font-semibold"
+              >
+                {registerMut.isPending ? (
+                  <Loader2 className="w-5 h-5 animate-spin mx-auto" />
+                ) : (
+                  'Send OTP'
+                )}
+              </button>
 
-    <p className="text-center text-sm text-gray-500">
-      Already have an account?{' '}
-      <button onClick={() => setScreen('login')} className="font-semibold text-black">
-        Login
-      </button>
-    </p>
-  </motion.form>
-)}{screen === 'verifyOtp' && (
-  <motion.form
-    key="otp"
-    initial={{ opacity: 0, x: 20 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: -20 }}
-    onSubmit={(e) => {
-      e.preventDefault();
-      setError(null);
-      verifyOtpMut.mutate();
-    }}
-    className="space-y-4"
-  >
-    <p className="text-sm text-gray-500 text-center">
-      Enter OTP sent to {email}
-    </p>
+              <p className="text-center text-sm text-gray-500">
+                Already have an account?{' '}
+                <button onClick={() => setScreen('login')} className="font-semibold text-black">
+                  Login
+                </button>
+              </p>
+            </motion.form>
+          )}{screen === 'verifyOtp' && (
+            <motion.form
+              key="otp"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setError(null);
+                verifyOtpMut.mutate();
+              }}
+              className="space-y-4"
+            >
+              <p className="text-sm text-gray-500 text-center">
+                Enter OTP sent to {email}
+              </p>
 
-    <input
-      type="text"
-      value={otp}
-      onChange={(e) => setOtp(e.target.value)}
-      placeholder="Enter OTP"
-      className="w-full px-4 py-3 rounded-full border border-gray-300 text-sm text-center tracking-widest"
-    />
+              <input
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                placeholder="Enter OTP"
+                className="w-full px-4 py-3 rounded-full border border-gray-300 text-sm text-center tracking-widest"
+              />
 
-    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-    <button
-      type="submit"
-      disabled={verifyOtpMut.isPending}
-      className="w-full py-3 rounded-full bg-black text-white text-sm font-semibold"
-    >
-      {verifyOtpMut.isPending ? (
-        <Loader2 className="w-5 h-5 animate-spin mx-auto" />
-      ) : (
-        'Verify & Register'
-      )}
-    </button>
+              <button
+                type="submit"
+                disabled={verifyOtpMut.isPending}
+                className="w-full py-3 rounded-full bg-black text-white text-sm font-semibold"
+              >
+                {verifyOtpMut.isPending ? (
+                  <Loader2 className="w-5 h-5 animate-spin mx-auto" />
+                ) : (
+                  'Verify & Register'
+                )}
+              </button>
 
-    <button
-      type="button"
-      onClick={() => setScreen('register')}
-      className="text-sm text-gray-500 w-full"
-    >
-      Back
-    </button>
-  </motion.form>
-)}
+              <button
+                type="button"
+                onClick={() => setScreen('register')}
+                className="text-sm text-gray-500 w-full"
+              >
+                Back
+              </button>
+            </motion.form>
+          )}
         </AnimatePresence>
       </motion.div>
     </div>
